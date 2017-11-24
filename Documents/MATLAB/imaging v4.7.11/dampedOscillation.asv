@@ -1,0 +1,44 @@
+
+clear times A1 A2 err1 err2 per
+times = [0 100 250 500 1000];
+per = 0;
+A1 = ones(size(times));
+A2 = ones(size(times));
+err1 = ones(size(times));
+err2 = ones(size(times));
+
+for i =1 : length(times)
+    try
+        st = eval(['osc_' num2str(per) 'per_' num2str(times(i)) 'ms_mF2']);
+        A2(i) = 1e3*abs(st.res.a); % in um
+        conf = confint(st.res);
+        err2(i) = abs(1e3*conf(1,1) - A2(i)); % in um
+    catch ex
+    end
+    
+    try
+        st = eval(['osc_0per_' num2str(times(i)) 'ms_mF1']);
+        A1(i) = 1e3*abs(st.res.a); % in um
+        conf = confint(st.res);
+        err1(i) = abs(1e3*conf(1,1) - A1(i)); % in um
+    catch ex
+    end
+    
+end
+
+s1 = fitoptions('Method','NonlinearLeastSquares', 'Startpoint', [1 1], 'Weights', 1./err1.^2);
+s2 = fitoptions('Method','NonlinearLeastSquares', 'Startpoint', [1 1], 'Weights', 1./err2.^2);
+f1 = fittype('A*exp(-x/T)', 'coefficients', {'A', 'T'}, 'independent', 'x', 'dependent', 'y', 'options', s1);
+f2 = fittype('A*exp(-x/T)', 'coefficients', {'A', 'T'}, 'independent', 'x', 'dependent', 'y', 'options', s2);
+[out1.res, out1.gof, out1.output] = fit(1e-3*times', A1', f1);
+[out2.res, out2.gof, out2.output] = fit(1e-3*times', A2', f2);
+
+figure;
+hold on
+plot(out1.res, 'r', out2.res, 'b');1e-3*times, A1, 'or');
+plot(out2.res, 'b', 1e-3*times, A2, 'ob');
+hold off
+title(['mF=2, (' name ')'], 'interpreter', 'none');
+xlabel('time [ms]');
+ylabel('Y Position [mm]');
+legend({['mF=2, (' name ')'], ['fit mF=2, (' name ')']},'interpreter', 'none');

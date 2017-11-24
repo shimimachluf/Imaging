@@ -1,0 +1,140 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="1653460682" file="/Users/ShimonMachluf/Documents/MATLAB/imaging v4.7.11/imaging.prj" location="/Users/ShimonMachluf/Documents/MATLAB/imaging v4.7.11" name="imaging" target="target.mlapps" target-name="Package App">
+    <param.appname>imaging</param.appname>
+    <param.authnamewatermark>Shimon Machluf</param.authnamewatermark>
+    <param.email />
+    <param.company />
+    <param.icon>${PROJECT_ROOT}/imaging_resources/icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}/imaging_resources/icon_48.png</file>
+      <file>${PROJECT_ROOT}/imaging_resources/icon_24.png</file>
+      <file>${PROJECT_ROOT}/imaging_resources/icon_16.png</file>
+    </param.icons>
+    <param.summary>imaging analysis</param.summary>
+    <param.description />
+    <param.screenshot />
+    <param.version>4.7.11</param.version>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Curve Fitting Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>'1'</item>
+      <item>'60'</item>
+    </param.products.id>
+    <param.products.version>
+      <item>8.4</item>
+      <item>3.5</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}/imaging.mlappinstall</param.output>
+    <param.guid>cd9451bb-e2b4-4cee-ae59-22b7b84d79af</param.guid>
+    <unset>
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.description />
+      <param.screenshot />
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/imaging.m</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/Absorption.m</file>
+      <file>${PROJECT_ROOT}/CalcAtomsNo.m</file>
+      <file>${PROJECT_ROOT}/CalcReal.m</file>
+      <file>${PROJECT_ROOT}/CalcTheoretical.m</file>
+      <file>${PROJECT_ROOT}/CalcTheoreticalFull.m</file>
+      <file>${PROJECT_ROOT}/Dark.m</file>
+      <file>${PROJECT_ROOT}/Fit1DGaussian.m</file>
+      <file>${PROJECT_ROOT}/Fit1DGaussianHoleMouse.m</file>
+      <file>${PROJECT_ROOT}/Fit1DGaussianMouse.m</file>
+      <file>${PROJECT_ROOT}/Fit1DGaussianOnlyY.m</file>
+      <file>${PROJECT_ROOT}/Fit21DGaussianOnlyY.m</file>
+      <file>${PROJECT_ROOT}/Fit2D4Gaussian.m</file>
+      <file>${PROJECT_ROOT}/Fit2DGaussian.m</file>
+      <file>${PROJECT_ROOT}/Fit2DGaussianHoleMouse.m</file>
+      <file>${PROJECT_ROOT}/Fit2DGaussianMouse.m</file>
+      <file>${PROJECT_ROOT}/Fit4Gaussian.m</file>
+      <file>${PROJECT_ROOT}/FitBiModal1D.m</file>
+      <file>${PROJECT_ROOT}/FitBiModal2D.m</file>
+      <file>${PROJECT_ROOT}/FitFFT.m</file>
+      <file>${PROJECT_ROOT}/FitFringesY.m</file>
+      <file>${PROJECT_ROOT}/FitOnlyMax.m</file>
+      <file>${PROJECT_ROOT}/FitOnlyMaxMouse.m</file>
+      <file>${PROJECT_ROOT}/FitOnlyMaxNorm.m</file>
+      <file>${PROJECT_ROOT}/FitOnlyMaxYCuts.m</file>
+      <file>${PROJECT_ROOT}/FitSites.m</file>
+      <file>${PROJECT_ROOT}/FitSitesFull.m</file>
+      <file>${PROJECT_ROOT}/FitSitesMask.m</file>
+      <file>${PROJECT_ROOT}/FitSternGerlach.m</file>
+      <file>${PROJECT_ROOT}/FitThomasFermi1D.m</file>
+      <file>${PROJECT_ROOT}/FitThomasFermi1DOnlyY.m</file>
+      <file>${PROJECT_ROOT}/FitThomasFermi2D.m</file>
+      <file>${PROJECT_ROOT}/FitTypes.m</file>
+      <file>${PROJECT_ROOT}/FitXYCut.m</file>
+      <file>${PROJECT_ROOT}/FringeRemovalRef.m</file>
+      <file>${PROJECT_ROOT}/GeneralLoopTF.m</file>
+      <file>${PROJECT_ROOT}/MM.m</file>
+      <file>${PROJECT_ROOT}/Measurement.m</file>
+      <file>${PROJECT_ROOT}/PlotTypes.m</file>
+      <file>${PROJECT_ROOT}/QuickLoop.m</file>
+      <file>${PROJECT_ROOT}/ROI.m</file>
+      <file>${PROJECT_ROOT}/ROIUnits.m</file>
+      <file>${PROJECT_ROOT}/Sigma.m</file>
+      <file>${PROJECT_ROOT}/Size.m</file>
+      <file>${PROJECT_ROOT}/WithAtoms.m</file>
+      <file>${PROJECT_ROOT}/WithoutAtoms.m</file>
+      <file>${PROJECT_ROOT}/analyzeAndPlot.m</file>
+      <file>${PROJECT_ROOT}/analyzeMeasurement.m</file>
+      <file>${PROJECT_ROOT}/binning.m</file>
+      <file>${PROJECT_ROOT}/cloudstat.m</file>
+      <file>${PROJECT_ROOT}/createAppData.m</file>
+      <file>${PROJECT_ROOT}/createConsts.m</file>
+      <file>${PROJECT_ROOT}/createSavedData.m</file>
+      <file>${PROJECT_ROOT}/dampedSineY.m</file>
+      <file>${PROJECT_ROOT}/formatNum.m</file>
+      <file>${PROJECT_ROOT}/getnicedialoglocation.m</file>
+      <file>${PROJECT_ROOT}/gravity.m</file>
+      <file>${PROJECT_ROOT}/heating.m</file>
+      <file>${PROJECT_ROOT}/lifeTime1.m</file>
+      <file>${PROJECT_ROOT}/lifeTime2.m</file>
+      <file>${PROJECT_ROOT}/measDlg.m</file>
+      <file>${PROJECT_ROOT}/onlyPlot.m</file>
+      <file>${PROJECT_ROOT}/plotImage.m</file>
+      <file>${PROJECT_ROOT}/plotSG.m</file>
+      <file>${PROJECT_ROOT}/readFolder.m</file>
+      <file>${PROJECT_ROOT}/setdefaultbutton.m</file>
+      <file>${PROJECT_ROOT}/subdir.m</file>
+      <file>${PROJECT_ROOT}/temperature.m</file>
+      <file>${PROJECT_ROOT}/uibutton.m</file>
+      <file>${PROJECT_ROOT}/updateROI.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="/Users/ShimonMachluf/Documents/MATLAB/imaging v4.7.11" name="imaging.mlappinstall" optional="false">/Users/ShimonMachluf/Documents/MATLAB/imaging v4.7.11/imaging.mlappinstall</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/Applications/MATLAB_R2014b.app</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>true</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.11.4</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>maci64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

@@ -1,0 +1,354 @@
+probe detuning on resonance	External	parameter	6.8			nuRes
+Intrap vs. TOF image	External	parameter	0			InTrap
+Lifetime measurement	External	parameter	1			lifetime
+	\note: add RF-knife pulsetotal time to lifetime (+49)					
+Averaging scan value	External	parameter	1			AverageScan
+						
+TOF time	External	parameter	4			TOFDuration
+Field creation delay time	External	parameter	1.00			fielddelay
+exposure time	External	parameter	0.30*1+0.2*0			Texposure
+CCD readout time	External	parameter	700			Treadout
+ 						
+	External	camera	25*0+355*1	Y min		
+	External	camera	950*0+730*1	Y max		
+	External	camera	1	X min		
+	External	camera	1024	X max		
+						
+RF-tune in kHz	\External	parameter	24525			RFtune
+	\External	agilent	RFtune*1000	Freq		
+	\External	agilent	1.0	Amp		
+						
+AOM frequency in MHz	External	parameter	503			RStune
+R&S frequency	External	rohsch	RStune*1000000	Freq		
+Choose automatic output control	External	rohsch	False	Mode		
+Output power R&S	External	rohsch	10	Power		
+						
+Red and Blue pulses						
+Red length length in mus	External	parameter	150			PulseTune
+Red pulse length	External	srspulse	PulseTune*1000	CDPulseLength		
+Blue pulse length	External	srspulse	PulseTune*1000	ABPulseLength		
+Relative pulse delay	External	srspulse	0	RelativeDelay		
+						
+Set lens voltage	External	PWS4721	0	Voltage		
+						
+init devices 	0	MOT Shutter	open	TTL		
+ 	0	RF switch	output2	TTL		
+ 	0	FET switches	on	TTL		
+	0	MOS-FET/Relais	off	TTL		
+	0	Red Shutter	shut	TTL		
+	0	2, 3	shut	TTL		
+	0	Raman Trigger	low	TTL		
+ 	0	Probe AOM Switch	on	TTL		
+ 	0	Repump EOM	0.75	V	step	
+ 	0	Camera trigger	low	TTL		
+	0	Repump Shutter	open	TTL		
+ 	0	Attenuate rf	0.128*0	V	step	
+ 	0	rf0	0	kHz	reset	
+ 	200	rf1	25000	kHz	step	
+ 	0	OptPump Shutter	shut	TTL		
+ 	0	Probe  shutter	shut	TTL		
+ 	0	Probe AOM Detuning	nuRes	V	step	
+ 	0	Rb dispenser	off	TTL		
+ 	0	Opt pump AOM	8.45*0	V	step	
+	0	z-wire	0	V	step	
+ 	0	AOM	6.6*0+6.53	V	step	
+ 	0	EOM	2.8	V	step	
+	0	u-wire	0	V	step	
+	0	pinch wires	0	A	step	
+						
+params 	External	parameter	-1.92*0-1.1*1-1.5*0			xMOT
+params 	External	parameter	-83.74			yMOT
+params 	External	parameter	-77.65*0-78.65*0-77.25*1			zMOT
+	External	parameter	0			pinch
+						
+init MOT	0	Big coils	0.0637*yMOT-0.0637*zMOT	A	step	
+ 	0	Small coil	-0.08333*xMOT	A	step	
+ 	0	MOT coil	0.0744*yMOT+0.0744*zMOT	A	step	
+ 	0	MC	-0.0744*yMOT-0.0744*zMOT	A	step	
+	0	u-wire	4.8	V	step	
+ 	0	z-wire	0	A	step	
+	0	pinch wires	pinch	A	step	
+load MOT 	100	Rb dispenser	on	TTL		
+ 	8000	Rb dispenser	off	TTL		
+UHV recovery	5000	MOS-FET/Relais	off	TTL		
+ 	0	Opt pump AOM	8.45*0	V	step	
+						
+						
+params 	External	parameter	-0.6			x0
+ 	External	parameter	2.7*0+2.9			y0
+ 	External	parameter	0.6*0+0.4			z0
+ 	External	parameter	3.4*0+3.3			u0
+ 	External	parameter	9			t0
+						
+uMOT transfer 	0	Big coils	0.0637*y0-0.0637*z0	A	step	
+ 	0	MOT coil	0.0744*y0+0.0744*z0	A	step	
+ 	0	MC	0.0744*y0+0.0744*z0	A	step	
+ 	0	Small coil	-0.08333*x0	A	step	
+ 	0	u-wire	u0	A	step	
+ 	t0	EOM	2.8	V	step	
+						
+params 	External	parameter	-0.40*0-0.35			x1
+ 	External	parameter	0.1*1+0.15*0			y1
+ 	External	parameter	-0.7*0-0.55*1			z1
+ 	External	parameter	0.09			u1
+polgrad detuning ramp time	External	parameter	1*0+1.2			g1
+polgrad detuning	External	parameter	3.1*0+3.25			p1
+polgrad time	External	parameter	3.0*0+2.75			polgradtime
+shutter time	External	parameter	1.3			g2
+polgrad field ramp time	External	parameter	2*0+2.4			polgradramp
+	External	parameter	0.2			coilramptime
+	External	parameter	2.0			pumptime
+						
+polgrad stage	0	Opt pump AOM	0	V	step	
+ 	0	Repump EOM	0.75	V	step	
+ 	-fielddelay	Big coils	0.0637*y1-0.0637*z1	A	ramp	polgradramp
+ 	0	MOT coil	0.0744*y1+0.0744*z1	A	ramp	polgradramp
+ 	0	MC	0.0744*y1+0.0744*z1	A	ramp	polgradramp
+ 	0	Small coil	-0.08333*x1	A	ramp	polgradramp
+ 	0	u-wire	u0*u1	A	ramp	polgradramp
+ 	fielddelay+polgradramp-g1	AOM	6.6	V	step	
+ 	0	AOM	p1	V	ramp	g1
+ 	g1	AOM	p1	V	step	
+ 	polgradtime	AOM	p1	V	step	
+ 	-g2	MOT Shutter	shut	TTL		
+ 	\-2.5	Repump Shutter	shut	TTL		
+ 						
+opt pumping 	2.5*0+g2	Opt pump AOM	0	V	step	
+ 	0	AOM	0	V	step	
+ 	0	EOM	0	V	step	
+ 	0	Big coils	0	A	step	
+ 	0	MOT coil	0	A	step	
+ 	0	MC	0	A	step	
+ 	0	FET switches	on	TTL		
+ 						
+ 	0	u-wire	0	A	step	
+ 	0	Small coil	1	A	ramp	coilramptime
+ 	coilramptime+0.15	EOM	0	V	step	
+ 	0	Repump EOM	0.75	V	step	
+	0	OptPump Shutter	open			
+ 	0	Opt pump AOM	8.45	V	step	
+ 	0	AOM	6.6	V	step	
+ pumping duration	pumptime	Opt pump AOM	0	V	step	
+	0	OptPump Shutter	shut			
+ 	1	Repump EOM	4.95	V	step	
+ 	0	AOM	0	V	step	
+ 	0	EOM	2.8	V	step	
+ 	0	FET switches	on	TTL		
+						
+ 	0	Repump Shutter	shut	TTL		
+ 						
+ 						
+params 	External	parameter	4.25*0+4.8			x2
+ 	External	parameter	16.5*0-18*1			y2
+ 	External	parameter	0.25*0-0.85			z2
+ 	External	parameter	-13*0-17*0-14.7			w2
+	External	parameter	0.5			pinch2
+ 	External	parameter	1.6*0+1.4			t2
+						
+initial MT	-5*0-fielddelay	Big coils	0.0637*y2-0.0637*z2	A	ramp100	t2
+ 	0	MOT coil	0.0744*y2+0.0744*z2	A	ramp100	t2
+ 	0	MC	0.0744*y2+0.0744*z2	A	ramp100	t2
+ 	0	Small coil	-0.08333*x2	A	ramp100	t2
+ 	0.6*0	z-wire	w2	A	ramp100	t2
+	0	pinch wires	pinch2	A	ramp100	t2
+ 	fielddelay+t2+5*0	z-wire	w2	A	step	
+						
+RF start freq	External	parameter	28500*0+21500*1			finit
+Attenuation	External	parameter	8			Attinit
+						
+rf init	0	rf1	finit	kHz	step	
+	0	RF switch	output1	TTL		
+	0	Attenuate rf	Attinit	V	step	
+						
+params 	External	parameter	-4.0*0+3.0*1			x3
+ 	External	parameter	-28*1+40*0			y3
+ 	External	parameter	0.25*1			z3
+	External	parameter	16*0-17*1+20*0			w3
+	External	parameter	0.5			pinch3
+ 	External	parameter	100			t3
+						
+compressed MT	-fielddelay	Small coil	-0.08333*x3	A	ramp	t3
+	0	Big coils	0.0637*y3-0.0637*z3	A	ramp	t3
+ 	0	MOT coil	0.0744*y3+0.0744*z3	A	ramp	t3
+ 	0	MC	0.0744*y3+0.0744*z3	A	ramp	t3
+	0	z-wire	w3	A	ramp	t3
+	0	pinch wires	pinch3	A	step	
+ 	fielddelay+t3+5*0	z-wire	w3	A	step	
+						
+params 	External	parameter	4*0+5			x3a
+Compression fields a	External	parameter	-40*0-37.5			y3a
+ 	External	parameter	0.09			z3a
+	External	parameter	-18*0-20			w3a
+	External	parameter	pinch3			pinch3a
+fieldset b	External	parameter	3*0+3.55			x3b
+	External	parameter	-50*0-49			y3b
+ 	External	parameter	z3a			z3b
+	External	parameter	-19*0-19.25*1			w3b
+	External	parameter	pinch3a			pinch3b
+fieldset c	External	parameter	1.5			x3c
+	External	parameter	-50			y3c
+ 	External	parameter	0			z3c
+	External	parameter	-17.5			w3c
+	External	parameter	0			pinch3c
+Ramp frequencies	External	parameter	finit			f0
+ 	External	parameter	12000			fa
+ 	External	parameter	4000*1+2500*0+1800*0			fb
+ 	External	parameter	2600*0+2520*0+3000*1+500*0			fc
+Attenuation	External	parameter	10*0+7.8*0+8			Att0
+	External	parameter	5			Att1
+	External	parameter	6			Att2
+	External	parameter	Att2			Att3
+Ramp times 	External	parameter	225			t3a
+ 	External	parameter	2100*0+4700*1+5500*0			t3b
+ 	External	parameter	2100			t3c
+						
+rf evapramp	0	rf1	f0	kHz	step	
+	0	RF switch	output1	TTL		
+	0	Attenuate rf	Att0	V	step	
+	0	Attenuate rf	Att1	V	ramp100	t3a
+	0	rf1	fa	kHz	DDSramp	t3a
+fieldramp a	-fielddelay	Small coil	-0.08333*x3a	A	ramp100	t3a
+	0	Big coils	0.0637*y3a-0.0637*z3a	A	ramp100	t3a
+ 	0	MOT coil	0.0744*y3a+0.0744*z3a	A	ramp100	t3a
+ 	0	MC	0.0744*y3a+0.0744*z3a	A	ramp100	t3a
+	0	z-wire	w3a	A	ramp100	t3a
+	0	pinch wires	pinch3a	A	ramp100	t3a
+fieldramp b	t3a	Small coil	-0.08333*x3b	A	ramp100	t3b
+	0	Big coils	0.0637*y3b-0.0637*z3b	A	ramp100	t3b
+ 	0	MOT coil	0.0744*y3b+0.0744*z3b	A	ramp100	t3b
+ 	0	MC	0.0744*y3b+0.0744*z3b	A	ramp100	t3b
+	0	z-wire	w3b	A	ramp100	t3b
+	0	pinch wires	pinch3b	A	ramp100	t3b
+evapramp b	fielddelay+0	rf1	fb	kHz	DDSramp	t3b
+	0	Attenuate rf	Att2	V	ramp100	t3b
+	\t3b+0	rf1	fc	kHz	DDSramp	t3c
+	\0	Attenuate rf	Att3	V	ramp100	t3c
+fieldramp c	\-fielddelay	Small coil	-0.08333*x3c	A	ramp100	t3c
+	\0	Big coils	0.0637*y3c-0.0637*z3c	A	ramp100	t3c
+ 	\0	MOT coil	0.0744*y3c+0.0744*z3c	A	ramp100	t3c
+ 	\0	MC	0.0744*y3c+0.0744*z3c	A	ramp100	t3c
+	\0	z-wire	w3c	A	ramp100	t3c
+	\0	pinch wires	pinch3c	A	ramp100	t3c
+	\t3c+fielddelay	Attenuate rf	0	V	step	
+	0+t3b	RF switch	output2	TTL		
+						
+params 	External	parameter	0.03			x4
+	External	parameter	-42.63*1-50*0			y4
+	External	parameter	0			z4
+z-wire current	External	parameter	-16.79*1-13.84*0			w4
+x4 ramptime	External	parameter	20			t4
+						
+final loading	0	Small coil	-0.08333*x4	A	ramp	t4
+	0	Big coils	0.0637*y4-0.0637*z4	A	ramp	t4
+ 	0	MOT coil	0.0744*y4+0.0744*z4	A	ramp	t4
+ 	0	MC	0.0744*y4+0.0744*z4	A	ramp	t4
+ 	0	z-wire	w4	A	ramp	t4
+	0	pinch wires	0	V	step	
+	t4	MOT Shutter	shut	TTL		
+						
+params 	External	parameter	-2*0-1			x5
+	External	parameter	-5*0-1			y5
+	External	parameter	0			z5
+z-wire current	External	parameter	0			w5
+x5 ramptime	External	parameter	10			t5
+						
+final loading 2	\0	Small coil	-0.08333*x5	A	ramp	t5
+	\0	Big coils	0.0637*y5-0.0637*z5	A	ramp	t5
+ 	\0	MOT coil	0.0744*y5+0.0744*z5	A	ramp	t5
+ 	\0	MC	0.0744*y5+0.0744*z5	A	ramp	t5
+ 	\0	z-wire	w5	A	ramp	t5
+	\0	pinch wires	0	V	step	
+	\t5	MOT Shutter	shut	TTL		
+						
+						
+Red depletion pulse	\0	Red AOM	open	TTL		
+	\0.001*4	Red AOM	shut	TTL		
+	0	Red Shutter	open	TTL		
+	0	Blue Shutter	open	TTL		
+	\30	Trigger RedBlue	high	TTL		
+	\5	Trigger RedBlue	low	TTL		
+	35	Red Shutter	shut	TTL		
+get abs image closer	0	Red AOM	shut	TTL		
+						
+						
+params 	External	parameter	0			xRelease
+params 	External	parameter	0			yRelease
+params 	External	parameter	20			zRelease
+						
+params	External	parameter	1./TOFDuration			RampTOFRatio
+	lifetime+1.5*Treadout*InTrap	Big coils	0.0637*yRelease-0.0637*zRelease	A	ramp	TOFDuration*RampTOFRatio
+ 	0	MOT coil	0.0744*yRelease+0.0744*zRelease	A	ramp	TOFDuration*RampTOFRatio
+ 	0	MC	0.0744*yRelease+0.0744*zRelease	A	ramp	TOFDuration*RampTOFRatio
+ 	0	Small coil	-0.08333*xRelease	A	ramp	TOFDuration*RampTOFRatio
+	0	MOT Shutter	shut	TTL		
+ 	0	FET switches	on	TTL		
+	0	AOM	0	V	step	
+	0	EOM	0	V	step	
+	\0 	z-wire	0	V	ramp	TOFDuration*RampTOFRatio
+	0	z-wire	0	V	step	
+	0	pinch wires	0	A	step	
+						
+ 						
+abs image	-3.0+TOFDuration*(1-InTrap)-1.5*Treadout*InTrap	Probe AOM Switch	off	TTL		
+ 	0	Probe  shutter	open	TTL		
+ 	\0	Repump Shutter	open	TTL		
+ 	0	Repump EOM	0.75	V	step	
+ 	2.7	Camera trigger	high	TTL		
+	0	Trigger RedBlue	high	TTL		
+ 	0.3	Probe AOM Switch	on	TTL		
+ 	Texposure	Probe AOM Switch	off	TTL		
+ 	0	Repump EOM	4.95	V	step	
+ 	0	Camera trigger	low	TTL		
+	0	Trigger RedBlue	low	TTL		
+ 	0	Probe  shutter	shut	TTL		
+ 	5	Probe AOM Switch	on	TTL		
+ 	0	Repump Shutter	shut	TTL		
+ 						
+remove atoms	0	FET switches	off	TTL		
+						
+						
+light image	-3+TOFDuration+Treadout	Probe AOM Switch	off	TTL		
+ 	0	Probe  shutter	open	TTL		
+ 	\0	Repump Shutter	open	TTL		
+ 	0	Repump EOM	0.75	V	step	
+ 	2.7	Camera trigger	high	TTL		
+ 	0.3	Probe AOM Switch	on	TTL		
+ 	Texposure	Probe AOM Switch	off	TTL		
+ 	0	Repump EOM	4.95	V	step	
+ 	0	Camera trigger	low	TTL		
+ 	0	Probe  shutter	shut	TTL		
+ 	5	Probe AOM Switch	on	TTL		
+ 	0	Repump Shutter	shut	TTL		
+						
+dark image	-3+TOFDuration+Treadout	Probe AOM Switch	off	TTL		
+ 	0	Probe  shutter	shut	TTL		
+ 	\0	Repump Shutter	open	TTL		
+ 	0	Repump EOM	0.75	V	step	
+ 	2.7	Camera trigger	high	TTL		
+ 	0.3	Probe AOM Switch	off	TTL		
+ 	Texposure	Probe AOM Switch	off	TTL		
+ 	0	Repump EOM	4.95	V	step	
+ 	0	Camera trigger	low	TTL		
+ 	0	Probe  shutter	shut	TTL		
+ 	5	Probe AOM Switch	on	TTL		
+ 	0	Repump Shutter	shut	TTL		
+ 						
+reinit 	0	AOM	6.6	V	step	
+ 	0	EOM	2.8	V	step	
+ 	0	Opt pump AOM	8.45*0	V	step	
+ 	0	Repump EOM	0.75	V	step	
+ 	0	Repump Shutter	shut	TTL		
+ 	0	MOT Shutter	shut	TTL		
+ 	0	OptPump Shutter	shut	TTL		
+ 	0	Big coils	0	A	step	
+ 	0	MOT coil	0	A	step	
+ 	0	MC	0	A	step	
+ 	0	Small coil	0	A	step	
+ 	0	u-wire	0	A	step	
+ 	0	z-wire	0	V	step	
+	0	Blue Shutter	shut	TTL		
+						
+cycle delay 	0	MOT Shutter	shut	TTL		
+	\0	Attenuate rf	0	V	step	
+	\0	RF switch	output2	TTL		
+	6000-lifetime-t3a-t3b-t3c*0	Rb dispenser	off	TTL		

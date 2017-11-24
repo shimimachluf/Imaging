@@ -1,0 +1,13 @@
+
+function types = getTypes
+% types struct (constanses)
+types.str = {'Event Start Time' 'Analog Start Time' 'Analog Ramp Time' 'Analog Value' ...
+    'Digital Time' 'Digital Value' 'RF Time' 'RF Comma
+types.eventStartTime = 1;
+types.analogStartTime = 2;
+types.analogRampTime = 3;
+types.anlaogValue = 4;
+types.digitalTime = 5;
+types.digitalValue = 6;
+types.RFTime = 7;
+types.RFCommand = 8;
