@@ -20,7 +20,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % defining consts
 %
-appData.consts.vertion = '4.7.11';
+appData.consts.vertion = '4.7.11’;%test
 appData.consts. saveVersion = '-v7';
 appData.consts.runVer = runVer;
 
